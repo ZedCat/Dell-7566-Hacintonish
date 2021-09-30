@@ -20,19 +20,35 @@
 
 ## 三、已知问题
 
-1.wifi影响蓝牙耳机的信号，表现为用蓝牙耳机听歌会断断续续。
+1.wifi影响蓝牙耳机的信号，表现为用蓝牙耳机听歌会断断续续，硬件问题无法解决。
 
-2.声卡驱动不太完美。目前（2021-9-29）测试的layout id都不完美。目前EFI使用的layout id 是11，插耳机不行。如需要插耳机使用，请更改layout id为57，此ID外放只有左声道，其他正常。
+2.~~声卡驱动不太完美。目前（2021-9-29）测试的layout id都不完美。目前EFI使用的layout id 是11，插耳机不行。如需要插耳机使用，请更改layout id为57，此ID外放只有左声道，其他正常。~~ 已更新layout id 为21 目前外放，麦克，耳机基本正常。
 
-## 四、已解决问题
+附上可用id和测试情况
+|  ID  |  扬声器  |     麦克风 |  耳机    |
+| :-----| :---- |  :---- |  :---- |
+|  17  |  正常，声道偏左  |     正常 |  正常    |
+|  **21**  |  **正常**  | **正常** | **正常** |
+|  57  |  只有左声道  |     正常 |  正常    |
+|  69  |  只有左声道  |     正常 |  正常    |
 
-1. 以太网插上不识别，已通过更新网卡驱动解决。
 
-## 五、可能会用到的链接和注意
+
+## 四、其他
 1. [OpenCore引导使用AppleALC修复音频声卡驱动](http://imacos.top/2020/04/23/1004-3/)
+
 2. 如需修改声卡ID，Mac环境下请使用 28 版本的OC configurator编辑config.plist
 
-## 六、感谢
+3. 允许打开任意来源软件： sudu spctl --master-disable
+
+4. 安装 brew ,会安装git
+
+   - 设置代理 ：
+    ` export https_proxy=http://127.0.0.1:8889 http_proxy=http://127.0.0.1:8889 all_proxy=socks5://127.0.0.1:1089 `
+   - 安装命令 
+` /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" `
+
+## 五、感谢
 1. 第一次安装macOS Catatlina 10.15.7通过 [此仓库的EFI](https://github.com/thinhnpptit/hackintosh-OC-catalina-dell-7566-i5) 安装成功。
 
 2. 本仓库仅对 [此仓库](https://github.com/worship76/dell7559_Hackintosh_BigSur) 简单修改，感谢分享。
@@ -40,7 +56,6 @@
 ## 七、Todolist
 
 * 目前是oc0.6.6引导，想折腾升级到最新的0.7.3
-* 通过在Windows下查询发现触摸板是I2C接口的，有时间会折腾下
 * 美化下启动界面（抄袭下大佬的）
 
   
