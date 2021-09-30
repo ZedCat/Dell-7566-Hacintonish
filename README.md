@@ -1,4 +1,4 @@
-# Dell-7566-Hactonish
+# Dell-7566-Hacintonish
 
 ## 一、配置
 
