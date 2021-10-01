@@ -12,6 +12,7 @@
 |  显示器| 奇美 CMN15C4 ( 15.5 英寸 )【1920*1080】 |
 |  声卡| 瑞昱 @ 英特尔 High Definition Audio 控制器 【ALC256】 |
 | 网卡| 瑞昱 RTL8168/8111/8112 Gigabit Ethernet Controller / 戴尔|
+| **OC版本** | **已更新至0.7.3** |
 
 ## 二、步骤
 
@@ -37,7 +38,7 @@
 ## 四、其他
 1. [OpenCore引导使用AppleALC修复音频声卡驱动](http://imacos.top/2020/04/23/1004-3/)
 
-2. 如需修改声卡ID，Mac环境下请使用 28 版本的OC configurator编辑config.plist
+2. ~~如需修改声卡ID，Mac环境下请使用 28 版本的OC configurator编辑config.plist~~
 
 3. 允许打开任意来源软件： sudu spctl --master-disable
 
@@ -49,13 +50,16 @@
 ` /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" `
 
 ## 五、感谢
-1. 第一次安装macOS Catatlina 10.15.7通过 [此仓库的EFI](https://github.com/thinhnpptit/hackintosh-OC-catalina-dell-7566-i5) 安装成功。
-
-2. 本仓库仅对 [此仓库](https://github.com/worship76/dell7559_Hackintosh_BigSur) 简单修改，感谢分享。
+1. 第一次安装黑苹果是 **macOS Catatlina 10.15.7** 通过 [此仓库的EFI](https://github.com/thinhnpptit/hackintosh-OC-catalina-dell-7566-i5) 安装成功（感谢带我入坑：）
+2. 本仓库之前版本仅对 [此仓库](https://github.com/worship76/dell7559_Hackintosh_BigSur) 简单修改，感谢分享。
+3. 目前版本是根据官方教程自己配的（只定制了USB驱动，人品爆发，其他错误没遇到。）
 
 ## 七、Todolist
 
-* 目前是oc0.6.6引导，想折腾升级到最新的0.7.3
-* 美化下启动界面（抄袭下大佬的）
+* ~~目前是oc0.6.6引导，想折腾升级到最新的0.7.3~~
+
+* ~~美化下启动界面（抄袭下大佬的）~~
+
+* 折腾下I2C触摸板驱动
 
   
