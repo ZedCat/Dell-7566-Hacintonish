@@ -21,34 +21,25 @@
 
 ## 三、已知问题
 
-1.wifi影响蓝牙耳机的信号，表现为用蓝牙耳机听歌会断断续续，硬件问题无法解决。
-
-2.~~声卡驱动不太完美。目前（2021-9-29）测试的layout id都不完美。目前EFI使用的layout id 是11，插耳机不行。如需要插耳机使用，请更改layout id为57，此ID外放只有左声道，其他正常。~~ 已更新layout id 为21 目前外放，麦克，耳机基本正常。
-
-附上可用id和测试情况
-|  ID  |  扬声器  |     麦克风 |  耳机    |
-| :-----| :---- |  :---- |  :---- |
-|  17  |  正常，声道偏左  |     正常 |  正常    |
-|  **21**  |  **正常**  | **正常** | **正常** |
-|  57  |  只有左声道  |     正常 |  正常    |
-|  69  |  只有左声道  |     正常 |  正常    |
-
-
+1. wifi影响蓝牙耳机的信号，表现为用蓝牙耳机听歌会断断续续，硬件问题无法解决。
 
 ## 四、其他
 1. [OpenCore引导使用AppleALC修复音频声卡驱动](http://imacos.top/2020/04/23/1004-3/)
 
-2. ~~如需修改声卡ID，Mac环境下请使用 28 版本的OC configurator编辑config.plist~~
+2. 允许打开任意来源软件： sudu spctl --master-disable
 
-3. 允许打开任意来源软件： sudu spctl --master-disable
-
-4. 安装 brew ,会安装git
+3. 安装 brew ,会安装git
 
    - 设置代理 ：
     ` export https_proxy=http://127.0.0.1:8889 http_proxy=http://127.0.0.1:8889 all_proxy=socks5://127.0.0.1:1089 `
+   
    - 安装命令 
-` /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" `
+     ` /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" `
 
+4. 开机错误及解决
+	遇到错误先别慌，打开前辈们留下的经验寻找答案。
+	[黑苹果屋](http://imacos.top/2021/01/19/0154/)    大部分错误都能在此找到答案
+	[黑苹果星球](https://heipg.cn/tutorial/opencore-install-errors-handbook.html)  我的一个I2c驱动错误就是在这里找到答案的
 ## 五、感谢
 1. 第一次安装黑苹果是 **macOS Catatlina 10.15.7** 通过 [此仓库的EFI](https://github.com/thinhnpptit/hackintosh-OC-catalina-dell-7566-i5) 安装成功（感谢带我入坑：）
 2. 本仓库之前版本仅对 [此仓库](https://github.com/worship76/dell7559_Hackintosh_BigSur) 简单修改，感谢分享。
@@ -60,6 +51,8 @@
 
 * ~~美化下启动界面（抄袭下大佬的）~~
 
-* 折腾下I2C触摸板驱动
+* 折腾下I2C触摸板驱动（放弃！！！）
+
+* 升级12搞起！！！
 
   
