@@ -1,4 +1,4 @@
-# Dell-7566-Hacintonish
+# Dell-7566-Hacintonish-MacOs12
 
 ## 一、配置
 
@@ -45,8 +45,83 @@
 2. 本仓库之前版本仅对 [此仓库](https://github.com/worship76/dell7559_Hackintosh_BigSur) 简单修改，感谢分享。
 3. 目前版本是根据官方教程自己配的（只定制了USB驱动，人品爆发，其他错误没遇到。）
 
-## 七、Todolist
+## 六、升级12记录
 
-* 升级12搞起！！！
+> 版本一
 
-  
+**根据B站Up主的视频整理的文字教程，未测试，有兴趣的小伙伴可以试一试。**
+
+一、准备工作
+
+**提示：所有操作均在MacOs环境下操作**
+
+1. 下载最新稳定版的OC引导，[点我下载](https://github.com/acidanthera/OpenCorePkg)
+2. 下载匹配稳定版的QtOpenCoreConfig，[点我下载](https://github.com/ic005k/QtOpenCoreConfig)。下载后拷贝粘贴到应用程序目录（有其他老版本的可以重命名以区别）
+3. 下载propertree软件，[点我下载](https://github.com/corpnewt/ProperTree)
+
+二、开干
+
+1. 打开刚刚下载的QTOC软件，点击第一排蓝色数据库图标，双击sample.plist即可在桌面生成EFI文件夹（包含常用驱动）
+2. 打开刚刚生成的模板EFI文件夹，删除以下内容
+   - EFI/OC/Drivers目录下只保留三个`HFsPlus.efi` `OpenRuntime.efi` `OpenCanopy.efi`
+   - EFI/OC/ACPI目录下全部删除
+
+3. 点击QTOC第一排的硬盘图标挂载硬盘，拷贝以下内容
+   - EFI/OC/ACPI目录下全部内容拷贝至模板EFI文件夹的对应位置
+   - EFI/OC/KEXTS目录下的USB定制的驱动至模板EFI文件夹的对应位置，其他驱动需要在github上更新至最版本
+
+4. 使用propertree打开目前正在使用的config.plist。点击file-new新建一个窗口。原窗口右键点击collaps all 折叠全部拷贝以下项目至新窗口
+   - ACPI-Patch条目下所有内容
+   - Kernel-Patch条目下的所有内容（可以新建一个条目改成dictionary再粘贴，防止混淆）
+   - DeviceProperties-Add条目下的所有内容
+   - PlatformInfo-Generic条目下的所有内容
+5. 保存新窗口的内容至桌面，名称改为backup.plist（下次升级直接可以用），关闭所有ProperTree窗口
+6. 使用ProperTree打开模板EFI文件夹内的config.plist做以下操作
+   - 删除3条警告
+   - 把backup.plist的内容拷贝至对应位置（一条一条进行，拷贝完后保存）
+
+7. 使用QTOC打开模板EFI文件夹内的config.plist做以下操作
+   - ACPI删除自带的，添加模板文件夹目录ACPI下的所有内容，选项-调整如下：[![oUdkBd.png](https://z3.ax1x.com/2021/12/03/oUdkBd.png)](https://imgtu.com/i/oUdkBd)
+   - Booter-选项-调整如下：[![oUdFnH.png](https://z3.ax1x.com/2021/12/03/oUdFnH.png)](https://imgtu.com/i/oUdFnH)
+   - Misc-引导-PickerModer改成Externel，-安全里面：vault 改成：optional ；ExposeSensitiveData：2；ScanPolicy：0；勾选allowNvramreset allowsetdefault
+   - Nvram-boot-ars ：复制之前的参数即可； CSR：E7030000 ；KBD：类型改成string，值改成：zh-Hans-252
+   - PI：右下角改成custom
+   - UEFI-Drivers删除自带的，添加模板文件夹目录所有内容
+
+8. 保存并修改错误
+
+三、测试引导是否有问题
+
+ 	1. 把模板EFI文件夹拷贝至引导优盘测试是否可引导，引导通过后即可替换当前引导
+
+四、更新
+
+1. 检查更新，下载最新的系统。
+2. 下载完会自动安装，右上角退出安装macos
+3. 打开finder，应用程序，拷贝安装macosMonterey至U盘保存
+4. 点击立即升级即可（双系统的需要提前把OC里的默认系统改成MacOS）
+
+> 版本二
+
+此版本是我自己想的，成功了。（懒人版）
+
+前言：
+
+当前的mac版本是11.6，OC的版本的0.73，已经定制了USB，想升级到最新的12.1，决定升级下OC和相关驱动。
+
+一、准备工作
+
+在[OC官网](https://dortania.github.io/OpenCore-Install-Guide/ktext.html) 下载相关驱动文件并解压
+
+二、驱动更新
+
+1. ACPI文件夹复制原来的即可
+2. Drivers留下三个驱动`HfsPlus.efi` `OpenCanopy.efi` `OpenRuntime.efi`
+3. Kext文件夹把下载好的新驱动全部复制
+4. 复制一份新的config.plist对照的之前可以引导的把每项都设置一样
+
+三、测试排错
+
+1. 第一次报错i2c设备没屏蔽
+2. 第二次开机很慢，中间有个提示`IOKit Daemon (Kernelmanager) stall[0], (60s) : 'IOUSBHostDevice'`查找原因是蓝牙驱动需要添加一个bluetoothfixup.kext的驱动，添加后屏蔽原来的IntelBluetoothInjector.kext即可
+
